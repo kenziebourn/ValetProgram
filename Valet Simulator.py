@@ -19,6 +19,8 @@
 
 #Night Audit feature: program will create CSV file of all vehicle information for current guests in Garage sorted in alphabetical order (guest names) using Quicksort Algorithm
 
+
+import csv
 class Vehicle:
     """Represents the basic vehicle attributes"""
     def __init__(self,ticket_number, name, color, make, model,):
@@ -100,6 +102,7 @@ class Garage:
             #vehicle info dictionary modified so that car attributes are stored as values under associated key
             self._vehicle_info = {'Spot Number': [],'Ticket Number': [], 'Guest Name': [], 'Vehicle Color': [], 'Vehicle Make': [], 'Vehicle Model': [] }
 
+
             #iterate through the cars_added list to access all the cars in the garage
             for index, i in enumerate(self._vehicles_added):
 
@@ -110,6 +113,7 @@ class Garage:
                 self._vehicle_info['Vehicle Color'].append(i[2])
                 self._vehicle_info['Vehicle Make'].append(i[3])
                 self._vehicle_info['Vehicle Model'].append(i[4])
+                list1= list(self._vehicle_info.values())
 
             return "Vehicle successfully added to lot."
 
@@ -137,7 +141,7 @@ class Garage:
                     self._vehicle_info['Vehicle Make'].pop(index)
                     self._vehicle_info['Vehicle Model'].pop(index)
 
-                    self._spots += 1
+                    self._spots += 1 #increment spots by one since vehicle is now removed
 
 
         stayover = input("Is the guest returning (y/n)? ")
@@ -164,16 +168,24 @@ class Garage:
             print(i)
 
     def save_as_csv(self):
-        headers = ["Ticket Number" , "Guest Name", "Vehicle Color", "Vehicle Make", "Vehicle Model"]
+        headers = ["Spot Number", "Ticket Number" , "Guest Name", "Vehicle Color", "Vehicle Make", "Vehicle Model"]
         header_string = ','.join([str(x) for x in headers])  # separates headers with commas
         with open('audit.csv', 'w') as outfile:  # writes column headers as first line in output file
-            outfile.write(str(header_string) + '\n')\
-        for i in self._vehicle_info.items():
-            return i
-        with open('audit.csv','w') as outfile:
-            outfile.write(i + '\n')
+            outfile.write(str(header_string) + '\n')
+        for list in self._vehicle_info.items():
+            for number in list:
+                file = open('audit.csv', 'a+', newline='')
+                with file:
+                    write = csv.writer(file)
+                    write.writerows(str(number))
 
 
+
+
+
+
+
+#Example code
 my_lot = Garage()
 print(my_lot.spots_available())
 my_lot.add_vehicle(Car('130', 'McKenzie', 'Silver','Mazda','CX-5'))
