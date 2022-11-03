@@ -20,7 +20,7 @@
 #Night Audit feature: program will create CSV file of all vehicle information for current guests in Garage sorted in alphabetical order (guest names) using Quicksort Algorithm
 
 
-import csv
+
 class Vehicle:
     """Represents the basic vehicle attributes"""
     def __init__(self,ticket_number, name, color, make, model,):
@@ -81,8 +81,8 @@ class Garage:
     def __init__(self):
         self._vehicles_added = []
         self._spots = 30 #Max capacity of 30 spots in garage
-        self._vehicle_info = {}
-        self._data = []
+        self._vehicle_info = {} #dictionary of vehicle information
+
 
     def spots_available(self):
         """Method to return numbers of spots left in Garage"""
@@ -168,34 +168,27 @@ class Garage:
             print(i)
 
     def save_as_csv(self):
-        headers = ["Spot Number", "Ticket Number" , "Guest Name", "Vehicle Color", "Vehicle Make", "Vehicle Model"]
-        header_string = ','.join([str(x) for x in headers])  # separates headers with commas
-        with open('audit.csv', 'w') as outfile:  # writes column headers as first line in output file
-            outfile.write(str(header_string) + '\n')
         for list in self._vehicle_info.items():
             for number in list:
-                file = open('audit.csv', 'a+', newline='')
-                with file:
-                    write = csv.writer(file)
-                    write.writerows(str(number))
+                with open('audit.csv','a') as outfile:
+                    outfile.write(str(number)+ '\n')
 
 
+def main():
+    """main function used if main file is run as script"""
+    my_lot = Garage()
+    print(my_lot.spots_available())
+    my_lot.add_vehicle(Car('130', 'McKenzie', 'Silver', 'Mercedes-AMG', 'GT'))
+    my_lot.add_vehicle(Car('131', 'Thalia', 'Black', 'Porsche', 'Macan'))
+    my_lot.add_vehicle(Car('132', 'Tom', 'White', 'Jeep', 'Renegade'))
+    my_lot.add_vehicle(Motorcycle('133', 'Ben', 'Red', 'Yamaha', 'R1'))
+    my_lot.cars_in_garage()
+    print(my_lot.remove_vehicle('131', '10'))
+    print(my_lot.spots_available())
 
+if __name__ == "__main__":
+    main()
 
-
-
-
-#Example code
-my_lot = Garage()
-print(my_lot.spots_available())
-my_lot.add_vehicle(Car('130', 'McKenzie', 'Silver','Mazda','CX-5'))
-my_lot.add_vehicle(Car('131', 'Thalia', 'Black','Porsche','Macan'))
-my_lot.add_vehicle(Car('132', 'Tom', 'White','Jeep', 'Renegade'))
-my_lot.add_vehicle(Motorcycle('133', 'Ben', 'Red','Yamaha','R1'))
-my_lot.cars_in_garage()
-print(my_lot.remove_vehicle('131', '10'))
-print(my_lot.spots_available())
-my_lot.save_as_csv()
 
 
 
