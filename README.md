@@ -1,4 +1,11 @@
-# ValetProgram
-The following Valet program uses OOP to create a basic application that allows companies to keep a database of vehicle information all in one place. The program allows the users to add and remove vehicles in the garage as well as assign them to parking spots. Daily rates are $10/hr while overnight rates are $45/hr (<24hrs). The program also differentiates between returning cars (overnight stays) and checked out cars which then charges the appropriate rate according to hours spent in the garage. Lastly, the client is able to get an audit on all of the vehicles currently in the garage with guest information via a CSV file.
-
-(After working in valet for almost a year now, the job has inspired my interest for creating this basic program which is incredibly useful for the hospitality industry. I also have a love for cars in general.)
+●Object-oriented programming (OOP): The program is organized into classes, each representing a specific
+aspect of the valet service (e.g. a vehicle, a car, a motorcycle, the garage). These classes contain attributes
+and methods that represent the state and behavior of the valet service.
+● Design and implementation accurately simulates the valet service, including adding and removing vehicles
+from the garage, displaying the vehicles in the garage, charging the appropriate rate when a vehicle leaves,
+and allowing overnight customers to request their car
+● Data manipulation: The program involves manipulating data structures such as lists and dictionaries to store
+and retrieve information about the state of the garage, including the number of spots available, the vehicles
+currently in the garage, and the vehicle information for each vehicle.
+● Utilizes custom exception classes and error checking to handle a full garage and other potential errors that
+could occur during the valet service
